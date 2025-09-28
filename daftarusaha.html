@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulir Usaha - SIPUMA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #0a2b63;
+  background-image: linear-gradient(rgba(10, 43, 99, 0.7), rgba(10, 43, 99, 0.7)),
+                    url("img/Desain tanpa judul.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #0a2b63;
+    }
+
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: #0a2b63;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    header img {
+      width: 1.8rem;
+      height: 1.8rem;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin: 1.5rem 0;
+      font-size: 1.5rem;
+      color: #0a2b63;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 0.25rem;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    input, select, textarea {
+      padding: 0.6rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+
+    .checkbox-group label,
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      font-size: 0.85rem;
+      font-weight: 400;
+      gap: 0.5rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    button {
+      padding: 0.7rem;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    footer {
+      background: #0a2b63;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-top div {
+      flex: 1;
+      min-width: 100px;
+    }
+
+    .footer-top img {
+      width: 2.5em;
+      height: 2.5em;
+      object-fit: contain;
+      vertical-align: middle;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-bottom {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-footer {
+      background: white;
+      color: #0a2b63;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+      nav {
+        flex-wrap: wrap;
+      }
+      .footer-top, .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  
+  <header>
+    <div class="logo">SIPUMA</div>
+    <nav>
+      <a href="index.html">Beranda</a>
+      <a href="daftarusaha.html">Mendaftar Usaha</a>
+      <a href="tentangkami.html">Tentang Kami</a>
+      <a href="kontakkami.html">Kontak Kami</a>
+    </nav>
+    <div>
+  <a href="profil.html">
+    <img src="img/avatardefault_92824.png" alt="User Icon" width="30" style="cursor:pointer;">
+  </a>
+</div>
+  </header>
+
+
+   <div class="container">
+  <form method="POST" action="/submit-usaha">
+
+    <h1 style="text-align: center; color: #000000; font-size: 2rem; margin-bottom: 1rem;">Formulir Pendataan Usaha</h1>
+
+    <h2>I. Data Pribadi</h2>
+    <label>Nama Lengkap:</label>
+    <input type="text" name="nama_lengkap" required>
+
+      <label>NIK:</label>
+      <input type="text" name="nik">
+
+      <label>Jenis Kelamin:</label>
+      <label><input type="radio" name="gender" value="Laki-laki"> Laki-laki</label>
+      <label><input type="radio" name="gender" value="Perempuan"> Perempuan</label>
+
+      <label>Tanggal Lahir:</label>
+      <input type="date" name="tanggal_lahir">
+
+      <label>Status Perkawinan:</label>
+      <select name="status_perkawinan">
+        <option value="Belum Menikah">Belum Menikah</option>
+        <option value="Menikah">Menikah</option>
+        <option value="Cerai Hidup">Cerai Hidup</option>
+        <option value="Cerai Mati">Cerai Mati</option>
+      </select>
+
+      <label>Pendidikan Terakhir:</label>
+      <select name="pendidikan">
+        <option>SD</option>
+        <option>SMP</option>
+        <option>SMA</option>
+        <option>D3</option>
+        <option>S1</option>
+        <option>S2</option>
+      </select>
+
+      <label>Alamat Domisili:</label>
+      <textarea name="alamat_domisili"></textarea>
+
+      <label>No HP / WhatsApp:</label>
+      <input type="text" name="no_hp">
+
+      <label>Apakah Anda Disabilitas?</label>
+      <label><input type="radio" name="disabilitas" value="Ya"> Ya</label>
+      <label><input type="radio" name="disabilitas" value="Tidak"> Tidak</label>
+
+      <label>Apakah Anda Perempuan Tulang Punggung Keluarga?</label>
+      <label><input type="radio" name="perempuan_tpk" value="Ya"> Ya</label>
+      <label><input type="radio" name="perempuan_tpk" value="Tidak"> Tidak</label>
+
+      <label>Apakah Anda Kepala Keluarga?</label>
+      <label><input type="radio" name="kepala_keluarga" value="Ya"> Ya</label>
+      <label><input type="radio" name="kepala_keluarga" value="Tidak"> Tidak</label>
+
+      <h2>II. Data Keluarga</h2>
+      <label>Jumlah Anggota Keluarga:</label>
+      <input type="number" name="jumlah_anggota_keluarga">
+
+      <label>Jumlah Tanggungan:</label>
+      <input type="number" name="jumlah_tanggungan">
+
+      <label>Pelaku Usaha Adalah Tulang Punggung Keluarga?</label>
+      <label><input type="radio" name="tulang_punggung" value="Ya"> Ya</label>
+      <label><input type="radio" name="tulang_punggung" value="Tidak"> Tidak</label>
+
+      <h2>III. Data Usaha</h2>
+      <label>Nama Usaha:</label>
+      <input type="text" name="nama_usaha">
+
+      <label>Tahun Mulai Usaha:</label>
+      <input type="text" name="tahun_mulai">
+
+      <label>Jenis Usaha:</label>
+      <select name="jenis_usaha">
+        <option>Produksi</option>
+        <option>Jasa</option>
+        <option>Perdagangan</option>
+      </select>
+
+      <label>Bidang Usaha:</label>
+      <input type="text" name="bidang_usaha" placeholder="Contoh: Makanan, Fashion, Kerajinan, dll.">
+
+      <label>Jumlah Pegawai:</label>
+      <input type="number" name="jumlah_pegawai">
+
+      <label>Kapasitas Produksi per Bulan:</label>
+      <input type="number" name="kapasitas_produksi">
+
+      <label>Omzet Rata-Rata per Bulan (Rp):</label>
+      <input type="number" name="omzet">
+
+      <label>Modal Awal (Rp):</label>
+      <input type="number" name="modal_awal">
+
+      <label>Target Pasar:</label>
+      <label><input type="checkbox" name="target_pasar[]" value="Lokal"> Lokal</label>
+      <label><input type="checkbox" name="target_pasar[]" value="Nasional"> Nasional</label>
+      <label><input type="checkbox" name="target_pasar[]" value="Internasional"> Internasional (Ekspor)</label>
+
+      <label>Legalitas Usaha (boleh pilih lebih dari satu):</label>
+      <label><input type="checkbox" name="legalitas[]" value="NIB"> NIB</label>
+      <label><input type="checkbox" name="legalitas[]" value="SIUP"> SIUP</label>
+      <label><input type="checkbox" name="legalitas[]" value="NPWP"> NPWP</label>
+      <label><input type="checkbox" name="legalitas[]" value="PIRT"> PIRT</label>
+      <label><input type="checkbox" name="legalitas[]" value="BPOM"> BPOM</label>
+      <label><input type="checkbox" name="legalitas[]" value="Sertifikat Halal"> Sertifikat Halal</label>
+
+      <label>NIB (jika ada):</label>
+<input type="text" name="nib" placeholder="Nomor Induk Berusaha (opsional)">
+
+
+      <label>Apakah Usaha Anda Memiliki HAKI?</label>
+      <label><input type="radio" name="haki" value="Ya"> Ya</label>
+      <label><input type="radio" name="haki" value="Tidak"> Tidak</label>
+
+      <label>Sistem Pencatatan Keuangan:</label>
+      <label><input type="checkbox" name="pencatatan[]" value="Tidak Ada"> Tidak Ada</label>
+      <label><input type="checkbox" name="pencatatan[]" value="Manual"> Manual</label>
+      <label><input type="checkbox" name="pencatatan[]" value="Excel"> Excel</label>
+      <label><input type="checkbox" name="pencatatan[]" value="Aplikasi"> Aplikasi Akuntansi</label>
+
+      <label>Saluran Digital Usaha:</label>
+      <label><input type="checkbox" name="saluran_digital[]" value="Tidak Ada"> Tidak Ada</label>
+      <label><input type="checkbox" name="saluran_digital[]" value="Instagram"> Instagram</label>
+      <label><input type="checkbox" name="saluran_digital[]" value="Marketplace"> Marketplace (Shopee, Tokopedia, Gojek, dll)</label>
+      <label><input type="checkbox" name="saluran_digital[]" value="Website"> Website</label>
+
+      <label>Metode Pembayaran yang Diterima:</label>
+      <label><input type="checkbox" name="pembayaran[]" value="Tunai"> Tunai</label>
+      <label><input type="checkbox" name="pembayaran[]" value="Transfer Bank"> Transfer Bank</label>
+      <label><input type="checkbox" name="pembayaran[]" value="QRIS"> QRIS</label>
+      <label><input type="checkbox" name="pembayaran[]" value="E-wallet"> E-wallet</label>
+
+      <label>Status Produksi:</label>
+      <label><input type="radio" name="status_produksi" value="Produksi Sendiri"> Produksi Sendiri</label>
+      <label><input type="radio" name="status_produksi" value="Reseller/Dropship"> Reseller / Dropship</label>
+
+      <label>Kepemilikan Tempat Usaha:</label>
+      <select name="tempat_usaha">
+        <option>Milik Sendiri</option>
+        <option>Sewa</option>
+        <option>Rumah Pribadi</option>
+      </select>
+
+      <label>Sumber Modal Saat Ini:</label>
+      <select name="sumber_modal">
+        <option>Pribadi</option>
+        <option>Keluarga</option>
+        <option>Pinjaman Bank/Koperasi</option>
+        <option>Bantuan Pemerintah</option>
+      </select>
+
+      <label>Pernah Mengikuti Pelatihan UMKM?</label>
+      <label><input type="radio" name="ikut_pelatihan" value="Ya"> Ya</label>
+      <label><input type="radio" name="ikut_pelatihan" value="Tidak"> Tidak</label>
+
+      <label>Membutuhkan Pelatihan Tambahan?</label>
+      <label><input type="radio" name="butuh_pelatihan" value="Ya"> Ya</label>
+      <label><input type="radio" name="butuh_pelatihan" value="Tidak"> Tidak</label>
+
+      <label>Jenis Pelatihan yang Diinginkan:</label>
+      <textarea name="jenis_pelatihan"></textarea>
+
+      <label>Hambatan atau Tantangan Usaha Saat Ini:</label>
+      <textarea name="hambatan_usaha"></textarea>
+
+      <label>Unggah Foto Produk atau Tempat Usaha:</label>
+      <input type="file" name="foto_usaha">
+
+      <button type="submit">Kirim Data Usaha</button>
+    </form>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div><strong>SIPUMA</strong></div>
+      <div class="social-icons">
+        <img src="img/—Pngtree—white whatsapp icon png_3562063 (1).png" alt="WA">
+        <img src="img/toppng.com-facebook-button-circle-fb-icon-white-983x983.png" alt="FB">
+        <img src="img/—Pngtree—instagram white icon free logo_3570433.png" alt="IG">
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>Email<br><small>copyright2025</small></div>
+      <div>Telepon<br><small>copyright2025</small></div>
+      <button class="btn-footer">Hubungi Kami</button>
+    </div>
+  </footer>
+
+</body>
+</html>
