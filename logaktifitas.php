@@ -2,7 +2,7 @@
 session_start();
 require "config.php";
 
-// ✅ Pastikan hanya admin yang bisa akses
+// Pastikan hanya admin yang bisa akses
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: login.php");
     exit;
