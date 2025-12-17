@@ -1,19 +1,40 @@
 <?php
 session_start();
-require "config.php"; // koneksi database
+require "config.php"; // Pastikan file ini ada
 
-// ✅ Cek apakah admin sudah login
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: loginadmin.php");
+// --- ZERO TRUST SECURITY LAYER ---
+
+// 1. Cek Login
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
     exit;
 }
 
-// --- Ambil data untuk dashboard ---
+// 2. Cek Role (RBAC) - Wajib Admin
+if ($_SESSION['role'] !== 'admin') {
+    // Jika bukan admin, lempar ke halaman user
+    header("Location: index.php");
+    exit;
+}
+
+// 3. Session Timeout (30 Menit)
+$timeout_duration = 1800; 
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $timeout_duration) {
+    session_unset();     
+    session_destroy();   
+    header("Location: login.php?pesan=timeout"); 
+    exit;
+}
+$_SESSION['last_activity'] = time(); 
+
+// --- END SECURITY LAYER ---
+
+// --- AMBIL DATA DASHBOARD (Kode Asli Anda) ---
 $total_usaha = $conn->query("SELECT COUNT(*) AS jml FROM umkm")->fetch_assoc()['jml'] ?? 0;
 $total_pengguna = $conn->query("SELECT COUNT(*) AS jml FROM users WHERE role='user'")->fetch_assoc()['jml'] ?? 0;
 $total_log = $conn->query("SELECT COUNT(*) AS jml FROM log_aktivitas")->fetch_assoc()['jml'] ?? 0;
 
-// Ambil log aktivitas terbaru + join ke tabel user untuk ambil username
+// Ambil log aktivitas terbaru
 $logs = $conn->query("
     SELECT l.waktu, u.username, l.aktivitas 
     FROM log_aktivitas l
@@ -25,6 +46,7 @@ $logs = $conn->query("
 // Ambil pesan masuk
 $messages = $conn->query("SELECT * FROM messages ORDER BY created_at DESC");
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -33,6 +55,7 @@ $messages = $conn->query("SELECT * FROM messages ORDER BY created_at DESC");
   <title>Dashboard Admin SIPUMA</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
+    /* CSS ASLI ANDA (TIDAK DIUBAH) */
     body { margin: 0; font-family: 'Poppins', sans-serif; background-color: #f8fafc; }
 
     /* === Sidebar === */
@@ -107,13 +130,13 @@ $messages = $conn->query("SELECT * FROM messages ORDER BY created_at DESC");
   <a href="datausaha.php"> Data Usaha</a>
   <a href="pesanadmin.php">Pesan Masuk</a>
   <a href="logaktifitas.php"> Log Aktivitas</a>
-  <a href="logoutadmin.php"> Logout</a>
+  <a href="logout.php" style="background: rgba(255,0,0,0.2);"> Logout</a>
 </div>
 
 <div class="main">
   <div class="header">
     <h1>Dashboard Admin</h1>
-    <div class="welcome">Halo, <strong><?= htmlspecialchars($_SESSION['username']) ?></strong></div>
+    <div class="welcome">Halo, <strong><?= htmlspecialchars($_SESSION['nama'] ?? 'Administrator') ?></strong></div>
   </div>
 
   <div class="cards">
@@ -133,7 +156,7 @@ $messages = $conn->query("SELECT * FROM messages ORDER BY created_at DESC");
           <?php while ($row = $logs->fetch_assoc()): ?>
             <tr>
               <td><?= date('d-m-Y H:i', strtotime($row['waktu'])) ?></td>
-              <td><?= $row['username'] ?? 'Unknown' ?></td>
+              <td><?= htmlspecialchars($row['username'] ?? 'Unknown') ?></td>
               <td><?= htmlspecialchars($row['aktivitas']) ?></td>
             </tr>
           <?php endwhile; ?>
