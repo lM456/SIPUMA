@@ -18,7 +18,7 @@ if ($checkAdmin->num_rows === 0) {
     $insert->bind_param("ssss", $username, $email, $hash, $nama);
     $insert->execute();
 
-    echo "✅ Akun admin baru berhasil dibuat.<br>";
+    echo "Akun admin baru berhasil dibuat.<br>";
     echo "Username: {$username} | Password: {$passwordDefault}<br>";
     echo "Silakan login kembali.";
     exit;
